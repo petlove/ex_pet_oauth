@@ -7,24 +7,6 @@
 # General application configuration
 import Config
 
-config :ex_pet_oauth,
-  ecto_repos: [ExPetOauth.Repo]
-
-# Configures the endpoint
-config :ex_pet_oauth, ExPetOauthWeb.Endpoint,
-  url: [host: "localhost"],
-  render_errors: [view: ExPetOauthWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: ExPetOauth.PubSub,
-  live_view: [signing_salt: "rXFZk8YV"]
-
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :ex_pet_oauth, ExPetOauth.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
