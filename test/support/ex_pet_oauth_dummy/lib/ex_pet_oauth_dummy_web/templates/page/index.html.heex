@@ -1,0 +1,10 @@
+<section class="phx-hero">
+  <h1>ExPetOauth + Google</h1>
+  <%= if not is_nil(@current_user) do %>
+    <h2>Welcome, <%= @current_user.name %>!</h2>
+    <%= link "Logout", to: Routes.auth_path(@conn, :delete), method: "delete" %>
+    <br>
+  <% else %>
+    <%= button "Sign in with Google", to: Routes.auth_path(@conn, :request, "google") %>
+  <% end %>
+</section>

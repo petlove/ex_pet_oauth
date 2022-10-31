@@ -24,10 +24,10 @@ defmodule ExPetOauthWeb.ConnCase do
       import Phoenix.ConnTest
       import ExPetOauthWeb.ConnCase
 
-      alias ExPetOauthWeb.Router.Helpers, as: Routes
+      alias ExPetOauthDummyWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint ExPetOauthWeb.Endpoint
+      @endpoint ExPetOauthDummyWeb.Endpoint
     end
   end
 

@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(ExPetOauth.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(ExPetOauthDummy.Repo, :manual)
