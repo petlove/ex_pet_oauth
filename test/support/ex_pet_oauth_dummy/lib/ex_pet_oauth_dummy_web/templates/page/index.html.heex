@@ -1,7 +1,7 @@
 <section class="phx-hero">
   <h1>ExPetOauth + Google</h1>
   <%= if not is_nil(@current_user) do %>
-    <h2>Welcome, <%= @current_user.name %>!</h2>
+    <h2>Welcome, <%= @current_user.first_name %>!</h2>
     <%= link "Logout", to: Routes.auth_path(@conn, :delete), method: "delete" %>
     <br>
   <% else %>

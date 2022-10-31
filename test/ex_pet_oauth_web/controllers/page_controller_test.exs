@@ -8,10 +8,13 @@ defmodule ExPetOauthWeb.PageControllerTest do
     end
 
     test "GET / when user already logged in", %{conn: conn} do
-      %{conn: conn} = sign_in(conn, %{name: "Jhonatan"})
+      %{conn: conn, user: user} = sign_in(conn)
 
       conn = get(conn, "/")
-      assert html_response(conn, 200) =~ "Logout"
+
+      assert html = html_response(conn, 200)
+      assert html =~ user.first_name
+      assert html =~ "Logout"
     end
   end
 end
