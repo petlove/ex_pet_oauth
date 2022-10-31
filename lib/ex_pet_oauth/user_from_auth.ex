@@ -21,6 +21,11 @@ defmodule ExPetOauth.UserFromAuth do
   end
 
   defp basic_info(auth) do
-    %{id: auth.uid, first_name: auth.info.first_name, last_name: auth.info.last_name, image: auth.info.image}
+    %{
+      id: auth.uid,
+      first_name: auth.info.first_name,
+      last_name: auth.info.last_name,
+      image: auth.info.image
+    }
   end
 end

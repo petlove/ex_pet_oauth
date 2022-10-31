@@ -16,11 +16,11 @@ defmodule ExPetOauth.Application do
         ]
       else
         []
-      end |> IO.inspect()
-      # See https://hexdocs.pm/elixir/Supervisor.html
-      # for other strategies and supported options
-      opts = [strategy: :one_for_one, name: ExPetOauth.Supervisor]
-      Supervisor.start_link(children, opts)
+      end
+    # See https://hexdocs.pm/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: ExPetOauth.Supervisor]
+    Supervisor.start_link(children, opts)
     # end
   end
 

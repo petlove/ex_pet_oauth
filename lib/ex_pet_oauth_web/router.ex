@@ -1,7 +1,7 @@
 defmodule ExPetOauthWeb.Router do
   defmacro pipelines do
     quote do
-       pipeline :ex_pet_oauth_browser do
+      pipeline :ex_pet_oauth_browser do
         plug :accepts, ["html"]
         plug :fetch_session
         plug :fetch_live_flash
