@@ -22,7 +22,6 @@ defmodule ExPetOauthDummyWeb do
       use Phoenix.Controller, namespace: ExPetOauthDummyWeb
 
       import Plug.Conn
-      import ExPetOauthDummyWeb.Gettext
       alias ExPetOauthDummyWeb.Router.Helpers, as: Routes
     end
   end
@@ -49,13 +48,6 @@ defmodule ExPetOauthDummyWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
-    end
-  end
-
-  def channel do
-    quote do
-      use Phoenix.Channel
-      import ExPetOauthDummyWeb.Gettext
     end
   end
 
