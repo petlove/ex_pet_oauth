@@ -33,6 +33,4 @@ defmodule ExPetOauthWeb.AuthController do
     |> clear_session()
     |> redirect(to: "/")
   end
-
-  defp auth_adapter, do: Application.get_env(:ex_pet_oauth, :user_schema)
 end
