@@ -1,4 +1,4 @@
-defmodule ExPetOauth.User do
+defmodule ExPetOauthDummy.User do
   use Ecto.Schema
   import Ecto.Changeset
 

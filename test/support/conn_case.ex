@@ -22,8 +22,8 @@ defmodule ExPetOauthWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
+      import ExPetOauth.Fixtures
       import ExPetOauthWeb.ConnCase
-      import ExPetOauthWeb.Fixtures
 
       alias ExPetOauthDummyWeb.Router.Helpers, as: Routes
 

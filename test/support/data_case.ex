@@ -24,6 +24,7 @@ defmodule ExPetOauth.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import ExPetOauth.DataCase
+      import ExPetOauth.Fixtures
     end
   end
 

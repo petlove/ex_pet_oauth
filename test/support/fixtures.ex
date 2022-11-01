@@ -1,10 +1,10 @@
-defmodule ExPetOauthWeb.Fixtures do
+defmodule ExPetOauth.Fixtures do
   @moduledoc "Fixtures to helps user control in tests"
 
   import Plug.Test
 
   alias ExPetOauthDummy.Repo
-  alias ExPetOauth.User
+  alias ExPetOauthDummy.User
 
   @user_attrs %{
     email: "jailson.mendes@petlove.com.br",
