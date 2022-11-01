@@ -9,6 +9,10 @@ defmodule ExPetOauthWeb.Router do
         plug :protect_from_forgery
         plug :put_secure_browser_headers
       end
+
+      pipeline :authentication do
+        plug ExPetOauth.Plug.Authentication
+      end
     end
   end
 

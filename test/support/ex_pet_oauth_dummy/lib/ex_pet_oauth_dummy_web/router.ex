@@ -5,12 +5,8 @@ defmodule ExPetOauthDummyWeb.Router do
   ExPetOauthWeb.Router.pipelines()
   ExPetOauthWeb.Router.auth_routes()
 
-  pipeline :authorization do
-    plug ExPetOauth.Plug.Session
-  end
-
   scope "/", ExPetOauthDummyWeb do
-    pipe_through([:ex_pet_oauth_browser, :authorization])
+    pipe_through([:ex_pet_oauth_browser, :authentication])
 
     get("/", PageController, :index)
   end
