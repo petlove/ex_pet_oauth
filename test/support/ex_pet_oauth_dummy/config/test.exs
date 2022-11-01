@@ -26,6 +26,6 @@ config :logger, level: :warn
 config :phoenix, :plug_init_mode, :runtime
 
 config :ex_pet_oauth,
-  web_module: ExPetOauthDummyWeb,
   user_schema: ExPetOauthDummy.User,
+  web_module: ExPetOauthDummyWeb,
   repo: ExPetOauthDummy.Repo
