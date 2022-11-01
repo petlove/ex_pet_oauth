@@ -9,7 +9,7 @@ defmodule ExPetOauth.Plug.AuthenticationTest do
   test "when user isn't logged in, redirect to base path", %{conn: conn} do
     conn =
       conn
-      |> get(Routes.page_path(conn, :index))
+      |> get(Routes.page_path(conn, :show))
 
     assert redirected_to(conn) == "/"
     assert conn.status == 302
@@ -26,9 +26,9 @@ defmodule ExPetOauth.Plug.AuthenticationTest do
         email: "fake@fake.com"
       })
 
-    %{conn: conn, user: user} = sign_in(conn, user)
+    %{conn: conn} = sign_in(conn, user)
 
-    conn = get(conn, Routes.page_path(conn, :index))
+    conn = get(conn, Routes.page_path(conn, :show))
 
     assert redirected_to(conn) == "/"
     assert conn.status == 302
@@ -37,7 +37,7 @@ defmodule ExPetOauth.Plug.AuthenticationTest do
   test "when user logged in, set then to current_user", %{conn: conn} do
     %{conn: conn, user: user} = sign_in(conn)
 
-    conn = get(conn, Routes.page_path(conn, :index))
+    conn = get(conn, Routes.page_path(conn, :show))
 
     assert conn.assigns.current_user == user
   end

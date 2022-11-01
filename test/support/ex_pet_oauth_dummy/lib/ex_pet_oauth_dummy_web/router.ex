@@ -6,8 +6,14 @@ defmodule ExPetOauthDummyWeb.Router do
   ExPetOauthWeb.Router.auth_routes()
 
   scope "/", ExPetOauthDummyWeb do
-    pipe_through([:ex_pet_oauth_browser, :authentication])
+    pipe_through([:ex_pet_oauth_browser])
 
     get("/", PageController, :index)
+  end
+
+  scope "/manage", ExPetOauthDummyWeb do
+    pipe_through([:ex_pet_oauth_browser, :authentication])
+
+    get("/", PageController, :show)
   end
 end
