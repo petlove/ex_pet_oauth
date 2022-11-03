@@ -46,7 +46,7 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
 ```
 
 5. Add ExPetOauth configuration to your project:
-```
+```elixir
 config :ex_pet_oauth,
   web_module: MyAppWeb,
   user_schema: MyApp.User,
