@@ -1,11 +1,13 @@
 defmodule ExPetOauthWeb.Router do
   defmacro pipelines do
     quote do
+      layout_view = Application.get_env(:ex_pet_oauth, :layout_view)
+
       pipeline :ex_pet_oauth_browser do
         plug :accepts, ["html"]
         plug :fetch_session
         plug :fetch_live_flash
-        plug :put_root_layout, {ExPetOauthWeb.LayoutView, :root}
+        plug :put_root_layout, {layout_view, :root}
         plug :protect_from_forgery
         plug :put_secure_browser_headers
       end
