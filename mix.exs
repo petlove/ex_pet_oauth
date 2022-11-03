@@ -37,18 +37,15 @@ defmodule ExPetOauth.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.10"},
-      {:phoenix_ecto, "~> 4.4", only: :test},
       {:ecto_sql, "~> 3.6", only: :test},
-      {:postgrex, ">= 0.0.0", only: :test},
-      {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_view, "~> 0.17.5", only: :test},
       {:floki, ">= 0.30.0", only: :test},
-      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
-      {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
+      {:phoenix, "~> 1.6.10"},
+      {:phoenix_ecto, "~> 4.4", only: :test},
+      {:phoenix_html, "~> 3.0"},
+      {:phoenix_live_view, "~> 0.17.5"},
+      {:postgrex, ">= 0.0.0", only: :test},
       {:ueberauth_google, "~> 0.10"}
     ]
   end

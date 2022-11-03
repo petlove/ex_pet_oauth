@@ -38,6 +38,7 @@ defmodule ExPetOauthWeb do
       import Phoenix.LiveView.Router
     end
   end
+
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """
