@@ -4,10 +4,10 @@ defmodule ExPetOauth.MixProject do
   def project do
     [
       app: :ex_pet_oauth,
-      version: "1.0.0",
+      version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: Mix.compilers(),
+      compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
