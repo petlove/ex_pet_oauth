@@ -38,6 +38,7 @@ defmodule ExPetOauth.MixProject do
   defp deps do
     [
       {:ecto_sql, "~> 3.6", only: :test},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
