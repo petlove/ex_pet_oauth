@@ -80,7 +80,7 @@ defmodule ExPetOauth.MixProject do
       links: %{
         "GitHub" => "https://github.com/petlove/ex_pet_oauth"
       },
-      files: ~w(lib priv .formatter.exs LICENSE mix.exs README.md VERSION CHANGELOG.md)
+      files: ~w(lib .formatter.exs LICENSE mix.exs README.md VERSION)
     ]
   end
 end
