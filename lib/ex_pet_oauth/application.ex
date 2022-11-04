@@ -9,7 +9,7 @@ defmodule ExPetOauth.Application do
   def start(_type, _args) do
     # Start Dummy processes only in test
     children =
-      if Application.get_env(:ex_path_oauth, :env) == :test do
+      if Application.get_env(:ex_pet_oauth, :env) == :test do
         [
           ExPetOauthDummy.Repo,
           ExPetOauthDummyWeb.Endpoint

@@ -4,7 +4,7 @@ defmodule ExPetOauth.MixProject do
   def project do
     [
       app: :ex_pet_oauth,
-      version: "0.1.0",
+      version: get_version(),
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
@@ -66,6 +66,13 @@ defmodule ExPetOauth.MixProject do
     ]
   end
 
+  defp get_version do
+    case File.read("VERSION") do
+      {:ok, version} -> String.trim(version)
+      _ -> "0.0.0-unknown"
+    end
+  end
+
   def package do
     [
       name: :ex_pet_oauth,
@@ -73,7 +80,7 @@ defmodule ExPetOauth.MixProject do
       links: %{
         "GitHub" => "https://github.com/petlove/ex_pet_oauth"
       },
-      files: ~w(lib priv .formatter.exs LICENSE mix.exs README.md VERSION* CHANGELOG.md)
+      files: ~w(lib priv .formatter.exs LICENSE mix.exs README.md VERSION CHANGELOG.md)
     ]
   end
 end

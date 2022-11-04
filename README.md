@@ -54,7 +54,7 @@ config :ex_pet_oauth,
   layout_view: MyAppWeb.LayoutView
 ```
 
-6. Add ExPetOauth routes and pipilines to your `router.ex`
+6. Add ExPetOauth routes and pipelines to your `router.ex`
 ```elixir
 require ExPetOauthWeb.Router
 
@@ -85,9 +85,10 @@ def index(conn, _params) do
 end
 ```
 
-7. Now you can create your login button in your Frontend to the authentication route, like this:
+7. Now you can create your login and logout button in your Frontend to the authentication route, like this:
 ```elixir
  <%= button "Sign in with Google", to: Routes.auth_path(@conn, :request, "google") %>
+ <%= button "Logout", to: Routes.auth_path(@conn, :delete), method: :delete %>
 ```
 
 It's done! Now your users can make login with Google =)

@@ -1,7 +1,7 @@
 defmodule ExPetOauthWeb.Router do
   defmacro pipelines do
     quote do
-      layout_view = Application.get_env(:ex_pet_oauth, :layout_view)
+      layout_view = Application.compile_env(:ex_pet_oauth, :layout_view)
 
       pipeline :ex_pet_oauth_browser do
         plug :accepts, ["html"]
