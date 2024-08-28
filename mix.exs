@@ -42,10 +42,10 @@ defmodule ExPetOauth.MixProject do
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
-      {:phoenix, "~> 1.6.10"},
+      {:phoenix, "~> 1.7.12"},
       {:phoenix_ecto, "~> 4.4", only: :test},
-      {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_view, ">= 0.18.0"},
+      {:phoenix_html, "~> 4.0"},
+      {:phoenix_live_view, "~> 0.20.2"},
       {:postgrex, ">= 0.0.0", only: :test},
       {:ueberauth_google, "~> 0.10"}
     ]
