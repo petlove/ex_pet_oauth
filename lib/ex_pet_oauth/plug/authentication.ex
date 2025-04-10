@@ -16,7 +16,7 @@ defmodule ExPetOauth.Plug.Authentication do
   defp handle_session(nil, conn), do: restrict_access(conn)
 
   defp handle_session(user, conn) do
-    if is_struct(user) && String.match?(user.email, ~r/@petlove.com.br$/) do
+    if is_struct(user) && valid_email?(user.email) do
       assign(conn, :current_user, user)
     else
       restrict_access(conn)
@@ -28,5 +28,9 @@ defmodule ExPetOauth.Plug.Authentication do
     |> put_flash(:error, "Faça o login")
     |> redirect(to: "/")
     |> halt()
+  end
+
+  defp valid_email?(email) do
+    String.match?(email, ~r/@petlove.com.br$/) || String.match?(email, ~r/@outsourcing.petlove.com.br$/)
   end
 end
