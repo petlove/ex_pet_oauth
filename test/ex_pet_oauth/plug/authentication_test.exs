@@ -35,7 +35,15 @@ defmodule ExPetOauth.Plug.AuthenticationTest do
   end
 
   test "when user logged in, set then to current_user", %{conn: conn} do
-    %{conn: conn, user: user} = sign_in(conn)
+    user =
+      create_user(%{
+        email: "jailson.mendes" <> Enum.random(["@petlove.com.br", "@outsourcing.petlove.com.br"]),
+        first_name: "Jailson",
+        last_name: "Mendes",
+        image: "https://cdn.dicionariopopular.com/imagens/pai-de-familia-jailson-mendes-og.jpg"
+      })
+
+    %{conn: conn, user: user} = sign_in(conn, user)
 
     conn = get(conn, Routes.page_path(conn, :show))
 
