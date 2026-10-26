@@ -5,7 +5,7 @@ defmodule ExPetOauth.MixProject do
     [
       app: :ex_pet_oauth,
       version: get_version(),
-      elixir: "~> 1.12",
+      elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -45,7 +45,9 @@ defmodule ExPetOauth.MixProject do
       {:phoenix, "~> 1.7.12"},
       {:phoenix_ecto, "~> 4.4", only: :test},
       {:phoenix_html, "~> 4.0"},
+      {:phoenix_html_helpers, "~> 1.0", only: :test},
       {:phoenix_live_view, "~> 0.20.2"},
+      {:phoenix_view, "~> 2.0", only: :test},
       {:postgrex, ">= 0.0.0", only: :test},
       {:ueberauth_google, "~> 0.10"}
     ]
