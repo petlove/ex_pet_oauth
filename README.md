@@ -96,3 +96,7 @@ It's done! Now your users can make login with Google =)
 
 
 
+
+## Releasing
+
+See [RELEASING.md](RELEASING.md).
