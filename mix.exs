@@ -5,7 +5,7 @@ defmodule ExPetOauth.MixProject do
     [
       app: :ex_pet_oauth,
       version: get_version(),
-      elixir: "~> 1.12",
+      elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
