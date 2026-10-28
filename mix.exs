@@ -14,6 +14,17 @@ defmodule ExPetOauth.MixProject do
       name: "ExPetOauth",
       description: "Phoenix boilerplate for Petlove&Co Google OAuth 2.0",
       package: package(),
+      # Coverage is logged on every `mix test`, never enforced.
+      # Only lib/ counts: the dummy app and test helpers are left out.
+      test_coverage: [
+        summary: [threshold: 0],
+        ignore_modules: [
+          ~r/^ExPetOauthDummy/,
+          ExPetOauth.DataCase,
+          ExPetOauth.Fixtures,
+          ExPetOauthWeb.ConnCase
+        ]
+      ],
       source_url: "https://github.com/petlove/ex_path_oauth"
     ]
   end
@@ -64,7 +75,7 @@ defmodule ExPetOauth.MixProject do
       test: [
         "ecto.create --quiet --repo ExPetOauthDummy.Repo",
         "ecto.migrate --quiet --repo ExPetOauthDummy.Repo --migrations-path test/support/ex_pet_oauth_dummy/priv/repo/migrations",
-        "test"
+        "test --cover"
       ]
     ]
   end

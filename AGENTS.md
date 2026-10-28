@@ -14,7 +14,8 @@ Phoenix apps, via Ueberauth. Consumed from Hex by apps such as stargazer.
 
 `mix test` creates and migrates the dummy app's database first, so it needs a local
 Postgres (`postgres@localhost`, see `test/support/ex_pet_oauth_dummy/config/test.exs`).
-Minimum Elixir is 1.15 (`mix.exs`).
+Minimum Elixir is 1.15 (`mix.exs`). The alias runs `test --cover`: coverage of `lib/` is
+logged on every run (HTML in `cover/`), never enforced.
 
 ## Commits, PRs and releases
 
