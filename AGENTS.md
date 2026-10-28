@@ -24,7 +24,8 @@ Minimum Elixir is 1.15 (`mix.exs`).
   public function or config key removed/renamed) need `!`: `fix!:`, `feat!:`. Recheck the
   PR title whenever a breaking commit is added to an open PR.
 - Nephila releases from tags (`vX.Y.Z`) with git-cliff. Never hard-code a version in
-  `mix.exs` or add a version file, and never pick a version number: the version comes
-  from the tag, and `mix.exs` reads it. Follow [RELEASING.md](RELEASING.md).
+  `mix.exs` or add a version file, and never pick a version number: `mix.exs` reads it
+  from `EX_PET_OAUTH_VERSION`, else the tag, else Hex's `hex_metadata.config` (see
+  "Where the version comes from" in [RELEASING.md](RELEASING.md)).
 - `mix.lock` is not shipped to Hex: bumping a vulnerable dependency there only fixes this
   repo's builds. To force a patched version on consuming apps, raise the floor in `mix.exs`.
