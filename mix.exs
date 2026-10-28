@@ -69,10 +69,51 @@ defmodule ExPetOauth.MixProject do
     ]
   end
 
+  # The version comes from the release tag, never this file: EX_PET_OAUTH_VERSION when
+  # publishing, else the v* tag (own checkout or git dep), else the version Hex recorded
+  # when it installed the package, else 0.0.0-dev. Only an exactly tagged checkout gets
+  # the tag's version; N commits past v3.0.0 is 3.0.1-dev.N+<sha>, which sorts after
+  # 3.0.0 and before 3.0.1.
   defp get_version do
-    case File.read("VERSION") do
-      {:ok, version} -> String.trim(version)
-      _ -> "0.0.0-unknown"
+    env_version() || tag_version() || hex_version() || "0.0.0-dev"
+  end
+
+  defp env_version do
+    case System.get_env("EX_PET_OAUTH_VERSION", "") |> String.trim() do
+      "" -> nil
+      version -> version
+    end
+  end
+
+  # Only with a .git next to this file: anywhere else git would walk up into whatever
+  # repo the dep sits in.
+  defp tag_version do
+    args = ["describe", "--tags", "--long", "--match", "v*"]
+
+    with true <- File.exists?(Path.join(__DIR__, ".git")),
+         {out, 0} <- System.cmd("git", args, cd: __DIR__, stderr_to_stdout: true),
+         [_, major, minor, patch, since, sha] <-
+           Regex.run(~r/\Av(\d+)\.(\d+)\.(\d+)-(\d+)-g([0-9a-f]+)\z/, String.trim(out)) do
+      case since do
+        "0" -> "#{major}.#{minor}.#{patch}"
+        _ -> "#{major}.#{minor}.#{String.to_integer(patch) + 1}-dev.#{since}+#{sha}"
+      end
+    else
+      _ -> nil
+    end
+  rescue
+    # git isn't installed
+    ErlangError -> nil
+  end
+
+  # Installed from Hex there's no .git and no env var, but Hex writes the published
+  # version to hex_metadata.config in the dep's directory.
+  defp hex_version do
+    with {:ok, terms} <- :file.consult(Path.join(__DIR__, "hex_metadata.config")),
+         {_, version} <- List.keyfind(terms, "version", 0) do
+      version
+    else
+      _ -> nil
     end
   end
 
@@ -83,7 +124,7 @@ defmodule ExPetOauth.MixProject do
       links: %{
         "GitHub" => "https://github.com/petlove/ex_pet_oauth"
       },
-      files: ~w(lib .formatter.exs LICENSE mix.exs README.md VERSION)
+      files: ~w(lib .formatter.exs LICENSE mix.exs README.md)
     ]
   end
 end

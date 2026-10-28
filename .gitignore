@@ -22,6 +22,9 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 ex_pet_oauth-*.tar
 
+# Written by Hex in installed deps; read by mix.exs for the version, never committed.
+/hex_metadata.config
+
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
 
