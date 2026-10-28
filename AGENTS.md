@@ -5,7 +5,7 @@ Phoenix apps, via Ueberauth. Consumed from Hex by apps such as stargazer.
 
 ## Layout
 
-- `lib/`: the library. Only `lib/`, `mix.exs`, `README.md`, `VERSION`, `LICENSE` and
+- `lib/`: the library. Only `lib/`, `mix.exs`, `README.md`, `LICENSE` and
   `.formatter.exs` are shipped to Hex (`package/0` in `mix.exs`).
 - `test/support/ex_pet_oauth_dummy/`: a Phoenix dummy app used only by the tests. Its
   dependencies are `only: :test`.
@@ -23,8 +23,9 @@ Minimum Elixir is 1.15 (`mix.exs`).
 - Breaking changes for apps using the library (Elixir/OTP or dependency floor raised,
   public function or config key removed/renamed) need `!`: `fix!:`, `feat!:`. Recheck the
   PR title whenever a breaking commit is added to an open PR.
-- Never change `VERSION`, `CHANGELOG.md` or `.release-please-manifest.json` outside a
-  release PR, and never pick a version number: release-please computes them. Follow
-  [RELEASING.md](RELEASING.md).
+- Nephila releases from tags (`vX.Y.Z`) with git-cliff. Never hard-code a version in
+  `mix.exs` or add a version file, and never pick a version number: `mix.exs` reads it
+  from `EX_PET_OAUTH_VERSION`, else the tag, else Hex's `hex_metadata.config` (see
+  "Where the version comes from" in [RELEASING.md](RELEASING.md)).
 - `mix.lock` is not shipped to Hex: bumping a vulnerable dependency there only fixes this
   repo's builds. To force a patched version on consuming apps, raise the floor in `mix.exs`.

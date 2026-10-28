@@ -1,55 +1,56 @@
 # Releasing
 
-Versions, tags and `CHANGELOG.md` are produced by
-[release-please](https://github.com/googleapis/release-please). Nobody picks version
-numbers by hand: the next version is computed from the
-[Conventional Commit](https://www.conventionalcommits.org/) titles merged into `main`.
+Releases are cut by Nephila: it computes the next version with
+[git-cliff](https://git-cliff.org/) from the
+[Conventional Commit](https://www.conventionalcommits.org/) titles merged into `main`,
+creates the `vX.Y.Z` tag and a GitHub Release with the notes. Nobody picks version
+numbers by hand, and nothing is committed to `main` for a release: no version file, no
+changelog commit.
 
 ## Commit and PR titles
 
-PRs are squash-merged, so **the PR title becomes the commit** release-please reads.
+PRs are squash-merged, so **the PR title becomes the commit** git-cliff reads.
 
 | Title | Bump |
 |---|---|
 | `fix: ...`, `perf: ...` | patch |
 | `feat: ...` | minor |
 | `fix!: ...` / `feat!: ...` (or a `BREAKING CHANGE:` footer) | major |
-| `chore:`, `docs:`, `build:`, `test:`, `ci:` | none (not in the changelog) |
+| `chore:`, `docs:`, `build:`, `test:`, `ci:` | none |
 
 Anything that can break apps using the library — raising the Elixir/OTP floor, removing or
 renaming a public function, changing config keys, raising a dependency floor — needs `!`.
 If a PR gains a breaking commit, update its title before merging.
 
-## Release flow
+## Where the version comes from
 
-release-please runs locally through its CLI (there is no CI in this repo). You need a
-`gh` login with write access to `petlove/ex_pet_oauth`.
+`mix.exs` has no hard-coded version. `get_version/0` tries, in order:
 
-1. **Open or refresh the release PR.** It bumps `VERSION` (read by `mix.exs`) and updates
-   `CHANGELOG.md` and `.release-please-manifest.json`:
-   ```sh
-   npx -y release-please@17.11.2 release-pr \
-     --token="$(gh auth token)" --repo-url=petlove/ex_pet_oauth
-   ```
-   If a breaking change was merged without `!`, force the version with
-   `--release-as=X.Y.Z` and add a "BREAKING CHANGES" note to `CHANGELOG.md` in the release PR.
-2. **Review and merge the release PR** (squash).
-3. **Tag `vX.Y.Z` and create the GitHub Release.** Run this right after the merge;
-   release-please won't open the next release PR until the previous one is released:
-   ```sh
-   npx -y release-please@17.11.2 github-release \
-     --token="$(gh auth token)" --repo-url=petlove/ex_pet_oauth
-   ```
-4. **Publish to Hex** (Hex package owners only):
-   ```sh
-   git switch main && git pull && mix hex.publish
-   ```
+1. `EX_PET_OAUTH_VERSION`, set when publishing.
+2. `git describe --tags --long --match 'v*'`, only when `.git` sits next to `mix.exs`
+   (this repo's checkout, or a Mix git dep). On the tagged commit it's the tag's version
+   (`3.0.0`); N commits later it's the next patch as a dev version
+   (`3.0.1-dev.N+<sha>`). Shallow clones without tags fall through.
+3. `hex_metadata.config` next to `mix.exs`, which Hex writes when it installs the
+   package: apps installing from Hex get the published version.
+4. `0.0.0-dev`.
 
-## First release (3.0.0) — one-off
+To check: on `v3.0.0` `mix run -e 'IO.puts Mix.Project.config()[:version]'` prints
+`3.0.0`; one commit later `3.0.1-dev.1+<sha>`; with `EX_PET_OAUTH_VERSION=9.9.9` set,
+`9.9.9`.
 
-- Run step 1 with `--release-as=3.0.0`: PR #3 raised the minimum Elixir to 1.15 but was
-  merged as `fix:`, so release-please alone would propose 2.1.1. Add the breaking note
-  ("requires Elixir ~> 1.15") to the changelog in the release PR.
-- 2.1.0 was tagged but never published to Hex, so 3.0.0 is the first Hex release with the
-  `outsourcing.petlove.com.br` login; the generated changelog lists it on purpose.
-- Hex publishing waits until the package ownership transfer is done.
+## Publishing to Hex
+
+Hex package owners only, from the release tag and always with the version set:
+
+```sh
+git switch --detach vX.Y.Z
+EX_PET_OAUTH_VERSION=X.Y.Z mix hex.publish
+```
+
+Never publish without `EX_PET_OAUTH_VERSION`: from an untagged commit or a clone without
+tags the package would go out as `0.0.0-dev` or a dev version.
+
+Release notes live only in the
+[GitHub Releases](https://github.com/petlove/ex_pet_oauth/releases); there is no
+`CHANGELOG.md`.
