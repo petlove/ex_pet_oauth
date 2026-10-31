@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+# Singular [allowlist] on purpose: [[allowlists]] needs gitleaks >= 8.25.
+[allowlist]
+description = "Throwaway Phoenix secret_key_base values: the test dummy app's config, and the generated dev/test configs added in the initial commit (removed since)"
+paths = ['''(^|/)test/support/ex_pet_oauth_dummy/config/config\.exs$''']
+commits = ["a7bb47359ec7ab16ffbc121cb3b49c2a3f361dfb"]
